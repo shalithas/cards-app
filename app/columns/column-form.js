@@ -1,6 +1,6 @@
 import { createColumn } from "../../api/column-model.js";
 
-class Column extends HTMLElement {
+class ColumnForm extends HTMLElement {
   title = "";
   description = "";
 
@@ -77,4 +77,4 @@ class Column extends HTMLElement {
   }
 }
 
-customElements.define("add-column-block", Column);
+customElements.define("column-form", ColumnForm);
