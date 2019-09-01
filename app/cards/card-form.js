@@ -56,10 +56,7 @@ class CardForm extends HTMLElement {
     this.bindEvents();
   }
 
-  async bindEvents() {
-    await this.renderComplete;
-    await this.render();
-
+  bindEvents() {
     const form = this.root.querySelector("div form");
 
     form.onsubmit = evt => {
@@ -84,7 +81,7 @@ class CardForm extends HTMLElement {
     this.colId = id;
   }
 
-  async onSave(form) {
+  onSave(form) {
     const card = {
       title: form.get("title"),
       description: form.get("description"),
