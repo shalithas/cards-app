@@ -1,4 +1,4 @@
-import { getData } from "../api/api.js";
+import { getColumns } from "../api/column-model.js";
 import "./column.js";
 
 class HomePage extends HTMLElement {
@@ -9,7 +9,7 @@ class HomePage extends HTMLElement {
   }
 
   render() {
-    let data = getData();
+    let data = getColumns();
     this.root.innerHTML = `
             <style>
                 
@@ -26,9 +26,9 @@ class HomePage extends HTMLElement {
             </style>
             <div class="wrapper"></div>
         `;
-    data.columns.forEach(col => {
+    data.forEach(col => {
       const column = document.createElement("column-block");
-      column.column = col.title;
+      column.column = col;
       column.className = 'col';
       const wrapper = this.root.querySelector('div');
       wrapper.appendChild(column);
