@@ -7,14 +7,6 @@ let data = {
       {
         "id": 2,
         "title": "Column 2"
-      },
-      {
-        "id": 1,
-        "title": "Column 1"
-      },
-      {
-        "id": 2,
-        "title": "Column 2"
       }
     ],
     "cards": [

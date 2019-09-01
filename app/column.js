@@ -8,7 +8,6 @@ class Column extends HTMLElement {
     this.root = this.attachShadow({ mode: "open" });
   }
   set column(column) {
-    console.log(column);
     this.root.innerHTML = `
                 <style>
                     div.wrapper {
