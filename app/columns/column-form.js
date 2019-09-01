@@ -72,16 +72,16 @@ class ColumnForm extends HTMLElement {
     };
   }
 
-  onSave(form) {
+  async onSave(form) {
     const column = {
       title: form.get("title")
     };
 
-    if (this.activeColumn) {
+    if (this.activeColumn.id) {
       column.id = this.activeColumn.id;
-      updateColumn(column);
+      await updateColumn(column);
     } else {
-      createColumn(column);
+      await createColumn(column);
     }
 
     this.dispatchEvent(new CustomEvent("save", { detail: column }));

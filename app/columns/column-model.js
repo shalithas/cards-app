@@ -1,19 +1,50 @@
-import { getData } from "../../api/api.js";
+const url = "http://localhost:3000/columns";
 
-var { columns } = getData();
-
-export const getColumns = () => {
-  return columns;
+export const getColumns = async () => {
+  let res = await fetch(url);
+  return await res.json()
 };
 
-export const createColumn = col => {
-  col.id = columns.length + 1;
-  columns = [...columns, col];
-};
-
-export const updateColumn = col => {
-  columns = columns.filter(c => {
-    return c.id !== col.id;
+export const createColumn = async column => {
+  let res = await fetch(url, {
+    method: "POST",
+    body: JSON.stringify(column), // string or object
+    headers: {
+      "Content-Type": "application/json"
+    }
   });
-  columns = [...columns, col];
+  if (res.status >= 201 && res.status < 300) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const updateColumn = async column => {
+  let res = await fetch(url + `/${column.id}`, {
+    method: "PUT",
+    body: JSON.stringify(column), // string or object
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  if (res.status >= 201 && res.status < 300) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+export const deleteColumn = async column => {
+  let res = await fetch(url + `/${column.id}`, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json"
+    }
+  });
+  if (res.status >= 201 && res.status < 300) {
+    return true;
+  } else {
+    return false;
+  }
 };

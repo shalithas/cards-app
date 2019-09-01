@@ -9,8 +9,8 @@ class HomePage extends HTMLElement {
     this.root = this.attachShadow({ mode: "open" });
   }
 
-  render() {
-    let data = getColumns();
+  async render() {
+    let data = await getColumns();
     this.root.innerHTML = `
             <style>
                 
