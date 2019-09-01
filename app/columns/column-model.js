@@ -2,7 +2,7 @@ const url = "http://localhost:3000/columns";
 
 export const getColumns = async () => {
   let res = await fetch(url);
-  return await res.json()
+  return await res.json();
 };
 
 export const createColumn = async column => {
@@ -13,11 +13,7 @@ export const createColumn = async column => {
       "Content-Type": "application/json"
     }
   });
-  if (res.status >= 201 && res.status < 300) {
-    return true;
-  } else {
-    return false;
-  }
+  return res.status >= 201 && res.status < 300;
 };
 
 export const updateColumn = async column => {
@@ -28,11 +24,7 @@ export const updateColumn = async column => {
       "Content-Type": "application/json"
     }
   });
-  if (res.status >= 201 && res.status < 300) {
-    return true;
-  } else {
-    return false;
-  }
+  return res.status >= 201 && res.status < 300;
 };
 
 export const deleteColumn = async column => {
@@ -42,9 +34,5 @@ export const deleteColumn = async column => {
       "Content-Type": "application/json"
     }
   });
-  if (res.status >= 201 && res.status < 300) {
-    return true;
-  } else {
-    return false;
-  }
+  return res.status >= 201 && res.status < 300;
 };

@@ -16,11 +16,7 @@ export const createCard = async card => {
       "Content-Type": "application/json"
     }
   });
-  if (res.status >= 201 && res.status < 300) {
-    return true;
-  } else {
-    return false;
-  }
+  return res.status >= 201 && res.status < 300;
 };
 
 export const updateCard = async card => {
@@ -31,8 +27,7 @@ export const updateCard = async card => {
       "Content-Type": "application/json"
     }
   });
-  let jsonRes = await res.json();
-  console.log(res);
+  return res.status >= 201 && res.status < 300;
 };
 
 export const deleteCard = async card => {
@@ -42,6 +37,5 @@ export const deleteCard = async card => {
       "Content-Type": "application/json"
     }
   });
-  let jsonRes = await res.json();
-  console.log(res);
+  return res.status >= 201 && res.status < 300;
 };
