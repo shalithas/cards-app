@@ -1,7 +1,12 @@
 import { getData } from "./api.js";
 
-export const getColumns = () => {
-    const data = getData();
+var { columns } = getData();
 
-    return data.columns;
-}
+export const getColumns = () => {
+  return columns;
+};
+
+export const createColumn = col => {
+  col.id = columns.length + 1;
+  columns = [...columns, col];
+};

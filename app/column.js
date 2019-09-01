@@ -39,8 +39,8 @@ class Column extends HTMLElement {
                   }
                 </style>
               <div class="wrapper">
+                <h2>${column.title}</h2>
                 <div class="content">
-                    ${column.title}
                 </div>
               </div>
           `;
