@@ -58,8 +58,8 @@ class Column extends HTMLElement {
     };
   }
 
-  renderCards() {
-    const cards = getCards(this.columnData.id);
+  async renderCards() {
+    const cards = await getCards(this.columnData.id);
     const wrapper = this.root.querySelector("div div");
     wrapper.innerHTML = "";
     cards.forEach(card => {

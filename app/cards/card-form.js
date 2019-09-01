@@ -81,18 +81,18 @@ class CardForm extends HTMLElement {
     this.colId = id;
   }
 
-  onSave(form) {
+  async onSave(form) {
     const card = {
       title: form.get("title"),
       description: form.get("description"),
       columnId: this.colId
     };
 
-    if (this.card) {
+    if (this.card.id) {
       card.id = this.card.id;
-      updateCard(card);
+      await updateCard(card);
     } else {
-      createCard(card);
+      await createCard(card);
     }
 
     this.dispatchEvent(new CustomEvent("save", { detail: card }));
