@@ -1,3 +1,4 @@
+import {deleteCard} from './card-model.js';
 class Card extends HTMLElement {
   constructor() {
     super();
@@ -28,6 +29,7 @@ class Card extends HTMLElement {
                 </style>
               <div class="wrapper">
                 <a id="edit-link" href="#">Edit</a>
+                <a id="delete-link" href="#">Delete</a>
                 <h3>${this.cardData.title}</h3>
                 <p>${this.cardData.description}</p>
               </div>
@@ -37,10 +39,16 @@ class Card extends HTMLElement {
   }
 
   bindEvents(){
-    const editLink = this.root.querySelector("div a");
+    const editLink = this.root.getElementById('edit-link');
     editLink.onclick = evt => {
       evt.preventDefault();
       this.editCard(this.cardData);
+    };
+
+    const deleteLink = this.root.getElementById("delete-link");
+    deleteLink.onclick = evt => {
+      evt.preventDefault();
+      this.deleteCard(this.cardData);
     };
   }
 
@@ -48,6 +56,16 @@ class Card extends HTMLElement {
     this.dispatchEvent(new CustomEvent('edit', {
       detail: this.cardData
     }));
+  }
+
+  async deleteCard(id){
+    const res = confirm("Do you want to delete?");
+    if(res){
+      await deleteCard(this.cardData);
+      this.dispatchEvent(new CustomEvent('delete', {
+        detail: this.cardData
+      }));
+    }
   }
 }
 

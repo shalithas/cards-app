@@ -68,6 +68,9 @@ class Column extends HTMLElement {
       cardEle.addEventListener("edit", evt => {
         this.addCardBlock.setCardData(evt.detail);
       });
+      cardEle.addEventListener("delete", evt => {
+        this.renderCards();
+      });
       wrapper.appendChild(cardEle);
     });
     this.addCardBlock = document.createElement("card-form");
