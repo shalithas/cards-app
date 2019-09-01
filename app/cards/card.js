@@ -5,6 +5,7 @@ class Card extends HTMLElement {
     this.root = this.attachShadow({ mode: "open" });
   }
   set card(card) {
+    this.cardData = card;
     this.root.innerHTML = `
                 <style>
                   .wrapper {
@@ -26,10 +27,27 @@ class Card extends HTMLElement {
                   }
                 </style>
               <div class="wrapper">
-                <h3>${card.title}</h3>
-                <p>${card.description}</p>
+                <a id="edit-link" href="#">Edit</a>
+                <h3>${this.cardData.title}</h3>
+                <p>${this.cardData.description}</p>
               </div>
           `;
+          this.bindEvents();
+        
+  }
+
+  bindEvents(){
+    const editLink = this.root.querySelector("div a");
+    editLink.onclick = evt => {
+      evt.preventDefault();
+      this.editCard(this.cardData);
+    };
+  }
+
+  editCard(id){
+    this.dispatchEvent(new CustomEvent('edit', {
+      detail: this.cardData
+    }));
   }
 }
 

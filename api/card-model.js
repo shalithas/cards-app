@@ -11,3 +11,10 @@ export const getCards = (colmunId) => {
 export const createCard = (card) => {
     cards = [...cards, card];
 }
+
+export const updateCard = (card) => {
+    cards = cards.filter(c => {
+        return c.id !== card.id;
+    });
+    cards.push(card);
+}

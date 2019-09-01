@@ -1,5 +1,5 @@
 import "../cards/card.js";
-import "../cards/add-card-block.js";
+import "../cards/card-form.js";
 import { getCards } from "../../api/card-model.js";
 
 class Column extends HTMLElement {
@@ -51,19 +51,22 @@ class Column extends HTMLElement {
   renderCards() {
     const cards = getCards(this.columnData.id);
     const wrapper = this.root.querySelector("div div");
-    wrapper.innerHTML = '';
+    wrapper.innerHTML = "";
     cards.forEach(card => {
       const cardEle = document.createElement("card-block");
       cardEle.card = card;
+      cardEle.addEventListener("edit", evt => {
+        this.addCardBlock.setCardData(evt.detail);
+      });
       wrapper.appendChild(cardEle);
     });
-    const addCardBlock = document.createElement("add-card-block");
-    addCardBlock.columnId = this.columnData.id;
-    addCardBlock.addEventListener("save", (evt) => {
+    this.addCardBlock = document.createElement("card-form");
+    this.addCardBlock.columnId = this.columnData.id;
+    this.addCardBlock.addEventListener("save", evt => {
       this.onCardSave(evt);
     });
 
-    wrapper.appendChild(addCardBlock);
+    wrapper.appendChild(this.addCardBlock);
   }
 
   onCardSave(evt) {
