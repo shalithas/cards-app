@@ -1,4 +1,4 @@
-import { createColumn } from "../api/column-model.js";
+import { createColumn } from "../../api/column-model.js";
 
 class Column extends HTMLElement {
   title = "";

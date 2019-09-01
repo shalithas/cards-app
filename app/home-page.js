@@ -1,6 +1,6 @@
 import { getColumns } from "../api/column-model.js";
-import "./column.js";
-import "./add-column-block.js";
+import "./columns/column.js";
+import "./columns/add-column-block.js";
 
 class HomePage extends HTMLElement {
   constructor() {

@@ -1,6 +1,6 @@
-import "./card.js";
-import "./add-card-block.js";
-import { getCards } from "../api/card-model.js";
+import "../cards/card.js";
+import "../cards/add-card-block.js";
+import { getCards } from "../../api/card-model.js";
 
 class Column extends HTMLElement {
   constructor() {
