@@ -39,6 +39,7 @@ class Column extends HTMLElement {
                   }
                 </style>
               <div class="wrapper">
+                <a id="edit-link" href="#">Edit</a>
                 <h2>${column.title}</h2>
                 <div class="content">
                 </div>
@@ -46,6 +47,15 @@ class Column extends HTMLElement {
           `;
 
     this.renderCards();
+    this.bindEvents();
+  }
+
+  bindEvents(){
+    const editLink = this.root.querySelector("div a");
+    editLink.onclick = evt => {
+      evt.preventDefault();
+      this.editColumn(this.columnData);
+    };
   }
 
   renderCards() {
@@ -71,6 +81,12 @@ class Column extends HTMLElement {
 
   onCardSave(evt) {
     this.renderCards();
+  }
+
+  editColumn(col){
+    this.dispatchEvent(new CustomEvent('edit', {
+      detail: this.columnData
+    }));
   }
 }
 

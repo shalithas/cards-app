@@ -1,6 +1,6 @@
 import { getColumns } from "../api/column-model.js";
 import "./columns/column.js";
-import "./columns/add-column-block.js";
+import "./columns/column-form.js";
 
 class HomePage extends HTMLElement {
   constructor() {
@@ -33,13 +33,17 @@ class HomePage extends HTMLElement {
       const column = document.createElement("column-block");
       column.column = col;
       column.className = 'col';
+      column.addEventListener("edit", evt => {
+        this.colForm.setColumnData(evt.detail);
+      });
       wrapper.appendChild(column);
     });
-    const addColBlock = document.createElement('add-column-block');
-    addColBlock.addEventListener("save", (evt) => {
+    this.colForm = document.createElement('column-form');
+    this.colForm.setTitle('Add Column');
+    this.colForm.addEventListener("save", (evt) => {
       this.onCardSave(evt);
     });
-    wrapper.appendChild(addColBlock);
+    wrapper.appendChild(this.colForm);
   }
 
   onCardSave(evt){

@@ -1,17 +1,23 @@
-import { createColumn } from "../../api/column-model.js";
+import { createColumn, updateColumn } from "../../api/column-model.js";
 
 class ColumnForm extends HTMLElement {
-  title = "";
-  description = "";
-
   constructor() {
     super();
 
     this.root = this.attachShadow({ mode: "open" });
     this.render();
-    this.bindEvents();
   }
+
+  setTitle(title) {
+    this.title = title;
+    this.activeColumn = this.activeColumn ? this.activeColumn : { title: "" };
+    this.render();
+  }
+
   render() {
+    // this.activeColumn = this.activeColumn ? this.activeColumn : { title: "" };
+    // this.title = "Add Column";
+
     this.root.innerHTML = `
           <style>
               div.wrapper {
@@ -44,14 +50,16 @@ class ColumnForm extends HTMLElement {
             }
           </style>
         <div class="wrapper">
-          <h2>Add Column</h2>
+          <h2>${this.title}</h2>
           <form>
-            <div><input name="title" placeholder="title" /></div>
+            <div><input name="title" placeholder="title" value="${
+              this.activeColumn ? this.activeColumn.title : ""
+            }" /></div>
             <div><input type="submit" value="save" /></div>
           </form>
         </div>
     `;
-
+    this.bindEvents();
   }
 
   bindEvents() {
@@ -64,16 +72,26 @@ class ColumnForm extends HTMLElement {
     };
   }
 
-  async onSave(form) {
+  onSave(form) {
     const column = {
       title: form.get("title")
     };
-    console.log(column);
 
-    createColumn(column);
+    if (this.activeColumn) {
+      column.id = this.activeColumn.id;
+      updateColumn(column);
+    } else {
+      createColumn(column);
+    }
 
-    await this.renderComplete;
     this.dispatchEvent(new CustomEvent("save", { detail: column }));
+  }
+
+  setColumnData(col) {
+    this.activeColumn = col;
+    this.title = "Edit Column";
+    this.render();
+    this.bindEvents();
   }
 }
 
