@@ -1,3 +1,6 @@
+import "./card.js";
+import { getCards } from "../api/card-model.js";
+
 class Column extends HTMLElement {
   constructor() {
     super();
@@ -30,17 +33,22 @@ class Column extends HTMLElement {
 
                     div.content {
                         margin-left: 10px;
-                        background-color: #ebecf0;
 
                     }
                   }
                 </style>
               <div class="wrapper">
                 <div class="content">
-                    ${column}
+                    ${column.title}
                 </div>
               </div>
           `;
+    const cards = getCards(column.id);
+    cards.forEach(card => {
+      const cardEle = document.createElement("card-block");
+      cardEle.card = card;
+      this.root.querySelector("div div").appendChild(cardEle);
+    });
   }
 }
 
