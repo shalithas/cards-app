@@ -5,6 +5,7 @@ window.addEventListener("load", () => {
 
     const app = document.querySelector("App");
     const ele = document.createElement('home-page');
+    ele.className = 'wrapper';
     ele.render();
     app.appendChild(ele);
 });

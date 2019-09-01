@@ -1,0 +1,23 @@
+
+
+  /* general scaffolding */
+body {
+  font-family: Georgia, Times, 'Times New Roman', serif;
+  font-size: 20px;
+  line-height: 28px;
+  color: #343536;
+  background-color: rgb(75, 191, 107);
+  margin: 0;
+}
+.wrapper {
+  margin-bottom: 60px;
+}
+.wrapper:before,
+.wrapper:after{
+  content: ' ';
+  display: table;
+  clear: both;
+}
+
+
+  
