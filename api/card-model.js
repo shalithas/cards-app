@@ -1,9 +1,13 @@
 import { getData } from "./api.js";
 
-export const getCards = (colmunId) => {
-    const data = getData();
+let {cards} = getData();
 
-    return data.cards.filter(card => {
+export const getCards = (colmunId) => {
+    return cards.filter(card => {
         return card.columnId === colmunId;
     });
+}
+
+export const createCard = (card) => {
+    cards = [...cards, card];
 }

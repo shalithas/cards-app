@@ -1,4 +1,5 @@
 import "./card.js";
+import "./add-card-block.js";
 import { getCards } from "../api/card-model.js";
 
 class Column extends HTMLElement {
@@ -8,6 +9,7 @@ class Column extends HTMLElement {
     this.root = this.attachShadow({ mode: "open" });
   }
   set column(column) {
+    this.columnData = column;
     this.root.innerHTML = `
                 <style>
                     div.wrapper {
@@ -42,12 +44,30 @@ class Column extends HTMLElement {
                 </div>
               </div>
           `;
-    const cards = getCards(column.id);
+
+    this.renderCards();
+  }
+
+  renderCards() {
+    const cards = getCards(this.columnData.id);
+    const wrapper = this.root.querySelector("div div");
+    wrapper.innerHTML = '';
     cards.forEach(card => {
       const cardEle = document.createElement("card-block");
       cardEle.card = card;
-      this.root.querySelector("div div").appendChild(cardEle);
+      wrapper.appendChild(cardEle);
     });
+    const addCardBlock = document.createElement("add-card-block");
+    addCardBlock.columnId = this.columnData.id;
+    addCardBlock.addEventListener("save", (evt) => {
+      this.onCardSave(evt);
+    });
+
+    wrapper.appendChild(addCardBlock);
+  }
+
+  onCardSave(evt) {
+    this.renderCards();
   }
 }
 
