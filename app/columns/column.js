@@ -1,6 +1,6 @@
 import "../cards/card.js";
 import "../cards/card-form.js";
-import { getCards } from "../../api/card-model.js";
+import { getCards } from "../cards/card-model.js";
 
 class Column extends HTMLElement {
   constructor() {

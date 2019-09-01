@@ -1,4 +1,4 @@
-import { getColumns } from "../api/column-model.js";
+import { getColumns } from "./columns/column-model.js";
 import "./columns/column.js";
 import "./columns/column-form.js";
 

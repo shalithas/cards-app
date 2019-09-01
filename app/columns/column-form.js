@@ -1,4 +1,4 @@
-import { createColumn, updateColumn } from "../../api/column-model.js";
+import { createColumn, updateColumn } from "./column-model.js";
 
 class ColumnForm extends HTMLElement {
   constructor() {

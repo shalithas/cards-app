@@ -1,4 +1,4 @@
-import { createCard, updateCard } from "../../api/card-model.js";
+import { createCard, updateCard } from "./card-model.js";
 
 class CardForm extends HTMLElement {
   title = "";

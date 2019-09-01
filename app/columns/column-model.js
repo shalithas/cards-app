@@ -1,4 +1,4 @@
-import { getData } from "./api.js";
+import { getData } from "../../api/api.js";
 
 var { columns } = getData();
 
