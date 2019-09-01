@@ -33,6 +33,7 @@ class Card extends HTMLElement {
           }
         </style>
       <div class="wrapper">
+      <h2>Add Card</h2>
         <form>
           <div><input name="title" placeholder="title" /></div>
           <div><input name="description" placeholder="description" /></div>
