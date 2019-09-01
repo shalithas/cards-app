@@ -8,18 +8,26 @@ class Card extends HTMLElement {
     this.root.innerHTML = `
                 <style>
                   .wrapper {
-                    
                     background-color: #ebecf0;
+                    padding: 0 0 5px 0;
+                    margin: 10px;
+                  }
+
+                  h3 {
+                    font-size: 20px;
+                    padding: 10px 0;
+                    margin: 0;
+                    background-color: darkgray;
                   }
                     
                   p{
                     font-size: 12px;
+                    margin: 10px 0 0 0;
                   }
                 </style>
               <div class="wrapper">
-                <p>
-                ${card.description}
-                </p>
+                <h3>${card.title}</h3>
+                <p>${card.description}</p>
               </div>
           `;
   }
