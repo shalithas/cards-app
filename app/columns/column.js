@@ -11,40 +11,40 @@ class Column extends HTMLElement {
   set column(column) {
     this.columnData = column;
     this.root.innerHTML = `
-                <style>
-                    div.wrapper {
-                        float: left;
-                        width: 100%;
-                    }
-                  
-                    /* Responsive column widths */
-                    @media (min-width: 700px) {
-                  
-                    /* 3 */
-                    div.wrapper {
-                      width: 24.5%;
-                    }
+      <style>
+        div.wrapper {
+            float: left;
+            width: 100%;
+        }
+      
+        /* Responsive column widths */
+        @media (min-width: 700px) {
+      
+        /* 3 */
+        div.wrapper {
+          width: 24.5%;
+        }
 
-                    /* coloring/sizing */
-                    div.wrapper {
-                        box-sizing: border-box;
-                        moz-box-sizing: border-box;
-                        text-align: center;
-                    }
+        /* coloring/sizing */
+        div.wrapper {
+            box-sizing: border-box;
+            moz-box-sizing: border-box;
+            text-align: center;
+        }
 
-                    div.content {
-                        margin-left: 10px;
+        div.content {
+            margin-left: 10px;
 
-                    }
-                  }
-                </style>
-              <div class="wrapper">
-                <a id="edit-link" href="#">Edit</a>
-                <h2>${column.title}</h2>
-                <div class="content">
-                </div>
-              </div>
-          `;
+        }
+      }
+    </style>
+    <div class="wrapper">
+      <a id="edit-link" href="#">Edit</a>
+      <h2>${column.title}</h2>
+      <div class="content">
+      </div>
+    </div>
+  `;
 
     this.renderCards();
     this.bindEvents();
@@ -66,21 +66,21 @@ class Column extends HTMLElement {
       const cardEle = document.createElement("card-block");
       cardEle.card = card;
       cardEle.addEventListener("edit", evt => {
-        this.addCardBlock.setCardData(evt.detail);
+        this.cardForm.setCardData(evt.detail);
       });
       cardEle.addEventListener("delete", evt => {
         this.renderCards();
       });
       wrapper.appendChild(cardEle);
     });
-    this.addCardBlock = document.createElement("card-form");
-    this.addCardBlock.columnId = this.columnData.id;
-    this.addCardBlock.addEventListener("save", evt => {
+    this.cardForm = document.createElement("card-form");
     this.cardForm.title = 'Add Card';
+    this.cardForm.columnId = this.columnData.id;
+    this.cardForm.addEventListener("save", evt => {
       this.onCardSave(evt);
     });
 
-    wrapper.appendChild(this.addCardBlock);
+    wrapper.appendChild(this.cardForm);
   }
 
   onCardSave(evt) {
