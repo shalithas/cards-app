@@ -36,6 +36,9 @@ class HomePage extends HTMLElement {
       column.addEventListener("edit", evt => {
         this.colForm.setColumnData(evt.detail);
       });
+      column.addEventListener("delete", evt => {
+        this.render();
+      });
       wrapper.appendChild(column);
     });
     this.colForm = document.createElement('column-form');

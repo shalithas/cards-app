@@ -1,6 +1,7 @@
 import "../cards/card.js";
 import "../cards/card-form.js";
 import { getCards } from "../cards/card-model.js";
+import { deleteColumn } from './column-model.js';
 
 class Column extends HTMLElement {
   constructor() {
@@ -40,6 +41,7 @@ class Column extends HTMLElement {
     </style>
     <div class="wrapper">
       <a id="edit-link" href="#">Edit</a>
+      <a id="delete-link" href="#">Delete</a>
       <h2>${column.title}</h2>
       <div class="content">
       </div>
@@ -51,10 +53,16 @@ class Column extends HTMLElement {
   }
 
   bindEvents(){
-    const editLink = this.root.querySelector("div a");
+    const editLink = this.root.getElementById("edit-link");
     editLink.onclick = evt => {
       evt.preventDefault();
       this.editColumn(this.columnData);
+    };
+
+    const deleteLink = this.root.getElementById("delete-link");
+    deleteLink.onclick = evt => {
+      evt.preventDefault();
+      this.deleteCol(this.cardData);
     };
   }
 
@@ -91,6 +99,18 @@ class Column extends HTMLElement {
     this.dispatchEvent(new CustomEvent('edit', {
       detail: this.columnData
     }));
+  }
+
+  async deleteCol() {
+    const res = confirm("Do you want to delete?");
+    if (res) {
+      await deleteColumn(this.columnData);
+      this.dispatchEvent(
+        new CustomEvent("delete", {
+          detail: this.columnData
+        })
+      );
+    }
   }
 }
 
