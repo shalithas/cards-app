@@ -1,11 +1,9 @@
 import { createCard, updateCard } from "./card-model.js";
 
 class CardForm extends HTMLElement {
-  title = "";
 
   constructor() {
     super();
-    this.title = "Add Card";
 
     this.root = this.attachShadow({ mode: "open" });
     this.render();
@@ -47,6 +45,12 @@ class CardForm extends HTMLElement {
         </form>
       </div>
   `;
+  }
+
+  setTitle(title) {
+    this.title = title;
+    this.activeColumn = this.activeColumn ? this.activeColumn : { title: "" };
+    this.render();
   }
 
   setCardData(card) {
