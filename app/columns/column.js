@@ -74,7 +74,7 @@ class Column extends HTMLElement {
       wrapper.appendChild(cardEle);
     });
     this.cardForm = document.createElement("card-form");
-    this.cardForm.title = 'Add Card';
+    this.cardForm.setTitle('Add Card');
     this.cardForm.columnId = this.columnData.id;
     this.cardForm.addEventListener("save", evt => {
       this.onCardSave(evt);

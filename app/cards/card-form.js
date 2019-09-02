@@ -1,7 +1,6 @@
 import { createCard, updateCard } from "./card-model.js";
 
 class CardForm extends HTMLElement {
-
   constructor() {
     super();
 
@@ -49,7 +48,7 @@ class CardForm extends HTMLElement {
 
   setTitle(title) {
     this.title = title;
-    this.activeColumn = this.activeColumn ? this.activeColumn : { title: "" };
+    this.card = this.card ? this.card : { title: "" };
     this.render();
   }
 
