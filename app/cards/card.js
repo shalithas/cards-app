@@ -13,6 +13,8 @@ class Card extends HTMLElement {
           background-color: #ebecf0;
           padding: 0 0 5px 0;
           margin: 10px;
+          box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+          border-radius: 5px
         }
 
         h3 {
@@ -26,12 +28,43 @@ class Card extends HTMLElement {
           font-size: 12px;
           margin: 10px 0 0 0;
         }
+
+        .button-bar {
+          padding-top: 10px;
+        }
+
+        .button-bar a {
+          display: inline-block;
+          width: 40%;
+          background-color: #555555;
+          color: white;
+          padding: 3px 0;
+          text-decoration: none;
+        }
+
+        .button {
+          border: none;
+          color: white;
+          padding: 16px 32px;
+          text-align: center;
+          font-size: 16px;
+          margin: 4px 2px;
+          opacity: 0.6;
+          transition: 0.3s;
+          display: inline-block;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        .button:hover {opacity: 1}
       </style>
       <div class="wrapper">
-        <a id="edit-link" href="#">Edit</a>
-        <a id="delete-link" href="#">Delete</a>
         <h3>${this.cardData.title}</h3>
         <p>${this.cardData.description}</p>
+        <div class="button-bar">
+          <a class="button" id="edit-link" href="#">Edit</a>
+          <a class="button" id="delete-link" href="#">Delete</a>
+        </div>
       </div>
     `;
     this.bindEvents();
