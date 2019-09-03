@@ -9,29 +9,32 @@ class HeaderBar extends HTMLElement {
     }
     render() {
       this.root.innerHTML = `
-                  <style>
-                      div.wrapper {
-                          postion: abosolute;
-                          background: rgba(0,0,0,.15);
-                          left: 0;
-                          top:0;
-                          margin: 0;
-                          color: white;
-                          padding-left: 20px;
-                      }
+        <style>
+            div.wrapper {
+                postion: abosolute;
+                background: #01579b;
+                left: 0;
+                top:0;
+                margin: 0;
+                color: white;
+                padding-left: 20px;
+                height: 50px;
+            }
 
-                      h1 {
-                          font-size: 18px;
-                          display: inline;
-                      }
-                  </style>
-                <div class="wrapper">
-                  <h1>Cards App</h1>
+            h1 {
+                font-size: 18px;
+                display: inline-block;
+                margin: 10px 20px 0 0;
 
-                  <search-bar />
-                  
-                </div>
-            `;
+            }
+        </style>
+        <div class="wrapper">
+          <h1>Cards App</h1>
+
+          <search-bar />
+          
+        </div>
+    `;
     }
   }
   
