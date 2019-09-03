@@ -41,7 +41,7 @@ class Column extends HTMLElement {
           position: relative;
           background-color: #white;
           color: #2196f3;
-          border: 2px solid #03a9f4; /* Green */
+          border: 2px solid #03a9f4;
         }
 
         #column-header h2 {
