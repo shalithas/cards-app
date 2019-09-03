@@ -12,21 +12,13 @@ class HomePage extends HTMLElement {
   async render() {
     let data = await getColumns();
     this.root.innerHTML = `
-            <style>
-                
-            .col:nth-child(3n - 2) {
-                background-color: #26bbf0;
-            }
-            .col:parent:nth-child(3n) {
-                background-color: #11a3d7;
-            }
-
-            .wrapper {
-                padding: 5% 10%;
-            }
-            </style>
-            <div class="wrapper"></div>
-        `;
+      <style>
+        .wrapper {
+            padding: 5% 10%;
+        }
+      </style>
+      <div class="wrapper"></div>
+    `;
     const wrapper = this.root.querySelector('div');
     wrapper.innerHTML = '';
     data.forEach(col => {
