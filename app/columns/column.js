@@ -21,29 +21,46 @@ class Column extends HTMLElement {
         /* Responsive column widths */
         @media (min-width: 700px) {
       
-        /* 3 */
-        div.wrapper {
-          width: 24.5%;
-        }
+          /* 3 */
+          div.wrapper {
+            width: 24.5%;
+          }
 
-        /* coloring/sizing */
-        div.wrapper {
-            box-sizing: border-box;
-            moz-box-sizing: border-box;
-            text-align: center;
-        }
+          /* coloring/sizing */
+          div.wrapper {
+              box-sizing: border-box;
+              moz-box-sizing: border-box;
+              text-align: center;
+          }
 
-        div.content {
-            margin-left: 10px;
+          #column-header {
+            margin: 10px;
+            position: relative;
+            background-color: transparent;
+            color: black;
+            border: 2px solid #4CAF50; /* Green */
+          }
 
+          #column-header #edit-link {
+            position: absolute;
+            left: 22px;
+            top: 54%;
+          }
+
+          #column-header #delete-link {
+            position: absolute;
+            right: 22px;
+            top: 54%;
+          }
         }
-      }
     </style>
-    <div class="wrapper">
-      <a id="edit-link" href="#">Edit</a>
-      <a id="delete-link" href="#">Delete</a>
-      <h2>${column.title}</h2>
-      <div class="content">
+    <div id="wrapper" class="wrapper">
+      <div id="column-header">
+        <a id="edit-link" href="#">Edit</a>
+        <a id="delete-link" href="#">Delete</a>
+        <h2>${column.title}</h2>
+      </div>
+      <div class="content" id="content" >
       </div>
     </div>
   `;
@@ -68,7 +85,7 @@ class Column extends HTMLElement {
 
   async renderCards() {
     const cards = await getCards(this.columnData.id);
-    const wrapper = this.root.querySelector("div div");
+    const wrapper = this.root.getElementById("content");
     wrapper.innerHTML = "";
     cards.forEach(card => {
       const cardEle = document.createElement("card-block");
