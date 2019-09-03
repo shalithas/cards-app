@@ -18,7 +18,7 @@ class CardForm extends HTMLElement {
     this.root.innerHTML = `
         <style>
           .wrapper {
-            background-color: #ebecf0;
+            background-color: white;
             padding: 0 0 5px 0;
             margin: 10px;
             box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -29,7 +29,9 @@ class CardForm extends HTMLElement {
             font-size: 20px;
             padding: 10px 0;
             margin: 0;
-            background-color: darkgray;
+            background-color: #039be5;
+            font-weight: normal;
+            color: white;
           }
             
           form {
@@ -37,15 +39,42 @@ class CardForm extends HTMLElement {
           }
 
           form div {
-            margin-top: 5px;
+            margin-top: 10px;
           }
+
+          form .button {
+            display: inline-block;
+            width: 40%;
+            padding: 10px 0;
+            cursor: pointer;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            background-color: white;
+            color: black;;
+          }
+
+          form .input {    width: 90%;
+            padding: 5px;}
+
+          form .save{border: 2px solid #008CBA;}
+          form .cancel{border: 2px solid #f44336;}
+
+          form .button:hover { color: white; }
+
+          form .save:hover{background-color: #008CBA;}
+          form .cancel:hover{background-color: #f44336;}
+
+          .button-bar {margin-bottom: 10px;}
         </style>
       <div class="wrapper">
       <h3>${this.title}</h3>
         <form>
-          <div><input name="title" placeholder="title" value="${this.card.title}" /></div>
-          <div><input name="description" placeholder="description" value="${this.card.description}" /></div>
-          <div><input type="submit" value="save" /> <button type="button">Cancel</button></div>
+          <div><input class="input" name="title" placeholder="Title" value="${this.card.title}" /></div>
+          <div><input class="input" name="description" placeholder="Description" value="${this.card.description}" /></div>
+          <div class="button-bar">
+            <input class="button save" type="submit" value="Save" /> 
+            <button class="button cancel" type="button">Cancel</button>
+          </div>
         </form>
       </div>
   `;

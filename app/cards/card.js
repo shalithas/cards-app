@@ -10,7 +10,7 @@ class Card extends HTMLElement {
     this.root.innerHTML = `
       <style>
         .wrapper {
-          background-color: #ebecf0;
+          background-color: white;
           padding: 0 0 5px 0;
           margin: 10px;
           box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -21,12 +21,15 @@ class Card extends HTMLElement {
           font-size: 20px;
           padding: 10px 0;
           margin: 0;
-          background-color: darkgray;
+          background-color: #039be5;
+          color: white;
+          font-weight: normal;
         }
           
         p{
           font-size: 12px;
           margin: 10px 0 0 0;
+          padding: 0 5px;
         }
 
         .button-bar {
@@ -57,6 +60,10 @@ class Card extends HTMLElement {
         }
 
         .button:hover {opacity: 1}
+
+        #edit-link:hover {background-color: #00897b}
+        #delete-link:hover {background-color: #e53935}
+
       </style>
       <div class="wrapper">
         <h3>${this.cardData.title}</h3>

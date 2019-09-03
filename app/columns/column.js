@@ -32,32 +32,51 @@ class Column extends HTMLElement {
               moz-box-sizing: border-box;
               text-align: center;
           }
+        }
 
-          #column-header {
-            margin: 10px;
-            position: relative;
-            background-color: transparent;
-            color: black;
-            border: 2px solid #4CAF50; /* Green */
-          }
+        
 
-          #column-header #edit-link {
-            position: absolute;
-            left: 22px;
-            top: 54%;
-          }
+        #column-header {
+          margin: 10px;
+          position: relative;
+          background-color: #white;
+          color: #2196f3;
+          border: 2px solid #03a9f4; /* Green */
+        }
 
-          #column-header #delete-link {
-            position: absolute;
-            right: 22px;
-            top: 54%;
-          }
+        #column-header h2 {
+          margin: 0;
+          font-weight: normal;
+        }
+
+        #column-header .button {
+          display: block;
+          background-color: #03a9f4;
+          color: white;
+          width: 50px;
+          padding: 6px 0;
+          position: absolute;
+          text-decoration: none;
+        }
+
+        #column-header .button:hover {
+          width: 80px;
+          -webkit-transition: width 0.5s;
+          transition: width 0.5s;
+        }
+
+        #column-header #edit-link {
+          left: 0;
+        }
+
+        #column-header #delete-link {
+          right: 0;
         }
     </style>
     <div id="wrapper" class="wrapper">
       <div id="column-header">
-        <a id="edit-link" href="#">Edit</a>
-        <a id="delete-link" href="#">Delete</a>
+        <a id="edit-link" class="button" href="#">Edit</a>
+        <a id="delete-link" class="button" href="#">Delete</a>
         <h2>${column.title}</h2>
       </div>
       <div class="content" id="content" >
