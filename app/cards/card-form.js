@@ -21,6 +21,8 @@ class CardForm extends HTMLElement {
             background-color: #ebecf0;
             padding: 0 0 5px 0;
             margin: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            border-radius: 5px
           }
 
           h3 {
@@ -30,13 +32,16 @@ class CardForm extends HTMLElement {
             background-color: darkgray;
           }
             
-          p{
-            font-size: 12px;
+          form {
             margin: 10px 0 0 0;
+          }
+
+          form div {
+            margin-top: 5px;
           }
         </style>
       <div class="wrapper">
-      <h2>${this.title}</h2>
+      <h3>${this.title}</h3>
         <form>
           <div><input name="title" placeholder="title" value="${this.card.title}" /></div>
           <div><input name="description" placeholder="description" value="${this.card.description}" /></div>
