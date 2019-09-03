@@ -62,7 +62,7 @@ class ColumnForm extends HTMLElement {
             <div><input name="title" placeholder="title" value="${
               this.activeColumn ? this.activeColumn.title : ""
             }" /></div>
-            <div><input type="submit" value="save" /></div>
+            <div><input type="submit" value="save" /> <button type="button">Cancel</button></div>
           </form>
         </div>`
       }
@@ -86,6 +86,19 @@ class ColumnForm extends HTMLElement {
       showFormButton.onclick = evt => {
         evt.preventDefault();
         this.toggleForm();
+      };
+    }
+
+    const cancelButton = this.root.querySelector("form div button");
+    if(cancelButton){
+      cancelButton.onclick = evt => {
+        evt.preventDefault();
+        this.title = "Add Column";
+        this.activeColumn = {
+          title: "",
+        };
+        this.toggleForm();
+        this.render();
       };
     }
   }
@@ -113,6 +126,7 @@ class ColumnForm extends HTMLElement {
   setColumnData(col) {
     this.activeColumn = col;
     this.title = "Edit Column";
+    this.toggleForm();
     this.render();
     this.bindEvents();
   }
