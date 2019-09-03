@@ -6,6 +6,7 @@ class ColumnForm extends HTMLElement {
 
     this.root = this.attachShadow({ mode: "open" });
     this.render();
+    this.isFormVisible = false;
   }
 
   setTitle(title) {
@@ -49,15 +50,22 @@ class ColumnForm extends HTMLElement {
           }
         }
       </style>
-      <div class="wrapper">
-        <h2>${this.title}</h2>
-        <form>
-          <div><input name="title" placeholder="title" value="${
-            this.activeColumn ? this.activeColumn.title : ""
-          }" /></div>
-          <div><input type="submit" value="save" /></div>
-        </form>
-      </div>
+      ${
+        this.isFormVisible === false ? 
+        `<div>
+          <a id="show-form" href="#">Add Column</a>
+        </div>`
+          : 
+        `<div class="wrapper">
+          <h2>${this.title}</h2>
+          <form>
+            <div><input name="title" placeholder="title" value="${
+              this.activeColumn ? this.activeColumn.title : ""
+            }" /></div>
+            <div><input type="submit" value="save" /></div>
+          </form>
+        </div>`
+      }
     `;
     this.bindEvents();
   }
@@ -65,11 +73,26 @@ class ColumnForm extends HTMLElement {
   bindEvents() {
     const ele = this.root.querySelector("div form");
 
-    ele.onsubmit = evt => {
-      const form = new FormData(ele);
-      evt.preventDefault();
-      this.onSave(form);
-    };
+    if(ele){
+      ele.onsubmit = evt => {
+        const form = new FormData(ele);
+        evt.preventDefault();
+        this.onSave(form);
+      };
+    }
+
+    const showFormButton = this.root.getElementById("show-form");
+    if(showFormButton){
+      showFormButton.onclick = evt => {
+        evt.preventDefault();
+        this.toggleForm();
+      };
+    }
+  }
+
+  toggleForm(){
+    this.isFormVisible = !this.isFormVisible;
+    this.render();
   }
 
   async onSave(form) {
