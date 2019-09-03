@@ -22,11 +22,22 @@ class ColumnForm extends HTMLElement {
     this.root.innerHTML = `
       <style>
           div.wrapper {
-              float: left;
-              width: 100%;
-              background-color: #ebecf0;
-                padding: 0 0 5px 0;
-                margin: 10px;
+            float: left;
+            width: 100%;
+            background-color: white;
+            padding: 0;
+            margin: 10px;
+            box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+            border-radius: 5px
+          }
+
+          .wrapper h3 {
+            font-size: 20px;
+            padding: 10px 0;
+            margin: 0;
+            background-color: #039be5;
+            font-weight: normal;
+            color: white;
           }
         
           /* Responsive column widths */
@@ -49,20 +60,78 @@ class ColumnForm extends HTMLElement {
 
           }
         }
+
+        #show-form {
+          background-color: #white;
+          color: #2196f3;
+          border: 2px solid #03a9f4;
+          display: block;
+          width: 100%;
+          text-decoration: none;
+          padding: 5px 0;
+        }
+
+        #show-form:hover {
+          background-color: #2196f3;
+          color: white;
+          border: 2px solid #03a9f4;
+          display: block;
+          width: 100%;
+          text-decoration: none;
+          padding: 5px 0;
+        }
+
+        form {
+          margin: 10px 0 0 0;
+        }
+
+        form div {
+          margin-top: 10px;
+        }
+
+        form .button {
+          display: inline-block;
+          width: 40%;
+          padding: 10px 0;
+          cursor: pointer;
+          -webkit-transition-duration: 0.4s; /* Safari */
+          transition-duration: 0.4s;
+          background-color: white;
+          color: black;;
+        }
+
+        form .input {    width: 90%;
+          padding: 5px;}
+
+        form .save{border: 2px solid #008CBA;}
+        form .cancel{border: 2px solid #f44336;}
+
+        form .button:hover { color: white; }
+
+        form .save:hover{background-color: #008CBA;}
+        form .cancel:hover{background-color: #f44336;}
+
+        .button-bar {margin-bottom: 10px;}
+
+        form .input {    width: 90%;
+          padding: 5px;}
       </style>
       ${
         this.isFormVisible === false ? 
-        `<div>
+        `<div class="wrapper">
           <a id="show-form" href="#">Add Column</a>
         </div>`
           : 
         `<div class="wrapper">
-          <h2>${this.title}</h2>
+          <h3>${this.title}</h3>
           <form>
-            <div><input name="title" placeholder="title" value="${
+            <div><input class="input" name="title" placeholder="Title" value="${
               this.activeColumn ? this.activeColumn.title : ""
             }" /></div>
-            <div><input type="submit" value="save" /> <button type="button">Cancel</button></div>
+            <div class="button-bar">
+            <input class="button save" type="submit" value="Save" /> 
+            <button class="button cancel" type="button">Cancel</button>
+          </div>
           </form>
         </div>`
       }
