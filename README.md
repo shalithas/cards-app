@@ -1,8 +1,3 @@
-# readme
-
-Created By: Shalitha Senarathne
-Last Edited: Sep 04, 2019 10:58 PM
-
 # Card App
 
 This application lets you organize your work properly.
@@ -38,3 +33,7 @@ Now go to [http://localhost:5000](http://localhost:5000/)
 ## Usage
 
 This is where user guide will reside
+
+## Documentation
+
+Headover to https://shalithas.github.io/cards-app/docs
