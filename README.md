@@ -41,4 +41,4 @@ This is where user guide will reside
 
 ## Documentation
 
-Head over to [https://shalithas.github.io/cards-app/docs/](Card App Docs)
+Headover to https://shalithas.github.io/cards-app/docs
