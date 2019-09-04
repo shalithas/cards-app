@@ -1,3 +1,5 @@
+import {searchColumns} from '../columns/column-model.js';
+
 class HeaderBar extends HTMLElement {
   constructor() {
     super();
@@ -53,7 +55,14 @@ class HeaderBar extends HTMLElement {
   }
 
   onSearchChange(evt) {
-    console.log(evt.target.value);
+    this.dispatchEvent(new CustomEvent('search', {
+      detail: evt.target.value,
+      bubbles: true,
+      cancelable: false,
+      composed: true
+    }));
+    // const cards = await searchColumns(evt.target.value);
+    // console.log(cards);
   }
 }
 

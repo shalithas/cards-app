@@ -1,4 +1,4 @@
-import { getColumns } from "./columns/column-model.js";
+import { getColumns, searchColumns } from "./columns/column-model.js";
 import "./columns/column.js";
 import "./columns/column-form.js";
 
@@ -9,8 +9,8 @@ class HomePage extends HTMLElement {
     this.root = this.attachShadow({ mode: "open" });
   }
 
-  async render() {
-    let data = await getColumns();
+  async render(columns) {
+    let data = columns ? columns : await getColumns();
     this.root.innerHTML = `
       <style>
         .wrapper {
@@ -23,7 +23,7 @@ class HomePage extends HTMLElement {
     wrapper.innerHTML = '';
     data.forEach(col => {
       const column = document.createElement("column-block");
-      column.column = col;
+      column.setColumn(col, col.cards ? col.cards : null);
       column.className = 'col';
       column.addEventListener("edit", evt => {
         this.colForm.setColumnData(evt.detail);
@@ -43,6 +43,13 @@ class HomePage extends HTMLElement {
 
   onCardSave(evt){
     this.render();
+  }
+
+  async search(search){
+    console.log(search);
+    const columns = await searchColumns(search);
+    console.log(columns);
+    this.render(columns);
   }
 }
 

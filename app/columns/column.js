@@ -9,7 +9,8 @@ class Column extends HTMLElement {
 
     this.root = this.attachShadow({ mode: "open" });
   }
-  set column(column) {
+
+  setColumn(column, cards) {
     this.columnData = column;
     this.root.innerHTML = `
       <style>
@@ -84,7 +85,7 @@ class Column extends HTMLElement {
     </div>
   `;
 
-    this.renderCards();
+    this.renderCards(cards ? cards: null);
     this.bindEvents();
   }
 
@@ -102,8 +103,8 @@ class Column extends HTMLElement {
     };
   }
 
-  async renderCards() {
-    const cards = await getCards(this.columnData.id);
+  async renderCards(cardData) {
+    const cards = cardData ? cardData : await getCards(this.columnData.id);
     const wrapper = this.root.getElementById("content");
     wrapper.innerHTML = "";
     cards.forEach(card => {

@@ -5,10 +5,13 @@ window.addEventListener("load", () => {
     console.log("content loaded");
 
     const app = document.querySelector("App");
-    const ele = document.createElement('home-page');
+    const home = document.createElement('home-page');
     const header = document.createElement("header-bar");
-    ele.className = 'wrapper';
-    ele.render();
+    header.addEventListener('search', evt => {
+        home.search(evt.detail);
+    });
+    home.className = 'wrapper';
+    home.render();
     app.appendChild(header);
-    app.appendChild(ele);
+    app.appendChild(home);
 });

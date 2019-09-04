@@ -39,3 +39,13 @@ export const deleteCard = async card => {
   });
   return res.status >= 201 && res.status < 300;
 };
+
+export const searchCards = async text => {
+  let res = await fetch(url);
+  let cards = await res.json();
+  return cards.filter(card => {
+    const titleSearch = card.title.toLowerCase().search(text.toLowerCase());
+    const descriptionSearch = card.description ? card.description.toLowerCase().search(text.toLowerCase()) : -1;
+    return titleSearch > -1 || descriptionSearch > -1;
+  });
+};
