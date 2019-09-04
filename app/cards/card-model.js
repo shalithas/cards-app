@@ -1,5 +1,10 @@
 const url = "http://localhost:3000/cards";
 
+/**
+ * Fetch all the cards with the given columnId
+ * @param int colmunId 
+ * @returns {Array} List of cards
+ */
 export const getCards = async colmunId => {
   let res = await fetch(url);
   let cards = await res.json();
@@ -8,6 +13,11 @@ export const getCards = async colmunId => {
   });
 };
 
+/**
+ * Creates a new card
+ * @param {Object} card 
+ * @returns {boolean} true if saved suceeded false if failed
+ */
 export const createCard = async card => {
   let res = await fetch(url, {
     method: "POST",
@@ -19,6 +29,11 @@ export const createCard = async card => {
   return res.status >= 201 && res.status < 300;
 };
 
+/**
+ * Updates a given card
+ * @param {Object} card 
+ * @returns {boolean} true if saved suceeded false if failed
+ */
 export const updateCard = async card => {
   let res = await fetch(url + `/${card.id}`, {
     method: "PUT",
@@ -30,6 +45,11 @@ export const updateCard = async card => {
   return res.status >= 201 && res.status < 300;
 };
 
+/**
+ * Deletes a given card
+ * @param {Object} card 
+ * @returns {boolean} true if saved suceeded false if failed
+ */
 export const deleteCard = async card => {
   let res = await fetch(url + `/${card.id}`, {
     method: "DELETE",
@@ -40,6 +60,11 @@ export const deleteCard = async card => {
   return res.status >= 201 && res.status < 300;
 };
 
+/**
+ * Searches for a card that includes the given text
+ * @param {string} text Search text 
+ * @returns {Array} array of filtered cards
+ */
 export const searchCards = async text => {
   let res = await fetch(url);
   let cards = await res.json();
