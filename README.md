@@ -38,3 +38,7 @@ Now go to [http://localhost:5000](http://localhost:5000/)
 ## Usage
 
 This is where user guide will reside
+
+## Documentation
+
+Head over to [https://shalithas.github.io/cards-app/docs/](Card App Docs)
