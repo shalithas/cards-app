@@ -2,8 +2,7 @@
   "name": "cards-app",
   "version": "0.1.0",
   "private": true,
-  "dependencies": {
-  },
+  "dependencies": {},
   "scripts": {
     "analyze": "",
     "start": "npx serve .",

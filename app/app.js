@@ -1,10 +1,17 @@
 import "./home-page.js";
+import "./header/header-bar.js";
 
 window.addEventListener("load", () => {
-    console.log("content loaded");
+  console.log("content loaded");
 
-    const app = document.querySelector("App");
-    const ele = document.createElement('home-page');
-    ele.render();
-    app.appendChild(ele);
+  const app = document.querySelector("App");
+  const home = document.createElement("home-page");
+  const header = document.createElement("header-bar");
+  header.addEventListener("searchchange", evt => {
+    home.search(evt.detail);
+  });
+  home.className = "wrapper";
+  home.render();
+  app.appendChild(header);
+  app.appendChild(home);
 });
