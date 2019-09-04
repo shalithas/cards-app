@@ -1,8 +1,3 @@
-# readme
-
-Created By: Shalitha Senarathne
-Last Edited: Sep 04, 2019 10:58 PM
-
 # Card App
 
 This application lets you organize your work properly.
