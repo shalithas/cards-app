@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: columns/column.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: columns/column.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import "../cards/card.js";
+import "../cards/card-form.js";
+import { getCards } from "../cards/card-model.js";
+import { deleteColumn } from './column-model.js';
+
+/**
+ * Represents a column in the app
+ */
+class Column extends HTMLElement {
+  constructor() {
+    super();
+
+    this.root = this.attachShadow({ mode: "open" });
+  }
+
+  /**
+   * Renders the Column structure for the given column
+   * @param {Object} column Column object to be set 
+   * @param {Array} cards optional array of cards to be set 
+   */
+  setColumn(column, cards) {
+    this.columnData = column;
+    this.root.innerHTML = `
+      &lt;style>
+        div.wrapper {
+            float: left;
+            width: 100%;
+        }
+      
+        /* Responsive column widths */
+        @media (min-width: 700px) {
+      
+          /* 3 */
+          div.wrapper {
+            width: 24.5%;
+          }
+
+          /* coloring/sizing */
+          div.wrapper {
+              box-sizing: border-box;
+              moz-box-sizing: border-box;
+              text-align: center;
+          }
+        }
+
+        
+
+        #column-header {
+          margin: 10px;
+          position: relative;
+          background-color: #white;
+          color: #2196f3;
+          border: 2px solid #03a9f4;
+        }
+
+        #column-header h2 {
+          margin: 0;
+          font-weight: normal;
+        }
+
+        #column-header .button {
+          display: block;
+          background-color: #03a9f4;
+          color: white;
+          width: 50px;
+          padding: 6px 0;
+          position: absolute;
+          text-decoration: none;
+        }
+
+        #column-header .button:hover {
+          width: 80px;
+          -webkit-transition: width 0.5s;
+          transition: width 0.5s;
+        }
+
+        #column-header #edit-link {
+          left: 0;
+        }
+
+        #column-header #delete-link {
+          right: 0;
+        }
+    &lt;/style>
+    &lt;div id="wrapper" class="wrapper">
+      &lt;div id="column-header">
+        &lt;a id="edit-link" class="button" href="#">Edit&lt;/a>
+        &lt;a id="delete-link" class="button" href="#">Delete&lt;/a>
+        &lt;h2>${column.title}&lt;/h2>
+      &lt;/div>
+      &lt;div class="content" id="content" >
+      &lt;/div>
+    &lt;/div>
+  `;
+
+    this.renderCards(cards ? cards: null);
+    this.bindEvents();
+  }
+
+  /**
+   * Bindes the events for the elements in the class
+   */
+  bindEvents(){
+    const editLink = this.root.getElementById("edit-link");
+    editLink.onclick = evt => {
+      evt.preventDefault();
+      this.editColumn(this.columnData);
+    };
+
+    const deleteLink = this.root.getElementById("delete-link");
+    deleteLink.onclick = evt => {
+      evt.preventDefault();
+      this.deleteCol(this.cardData);
+    };
+  }
+
+  /**
+   * Renders the set of given cards
+   * @param {Array} cardData List of cards to be rendered
+   */
+  async renderCards(cardData) {
+    const cards = cardData ? cardData : await getCards(this.columnData.id);
+    const wrapper = this.root.getElementById("content");
+
+    wrapper.innerHTML = "";
+    cards.forEach(card => {
+      const cardEle = document.createElement("card-block");
+      cardEle.card = card;
+      cardEle.addEventListener("edit", evt => {
+        this.cardForm.setCardData(evt.detail);
+      });
+
+      cardEle.addEventListener("delete", evt => {
+        this.renderCards();
+      });
+      wrapper.appendChild(cardEle);
+    });
+
+    this.cardForm = document.createElement("card-form");
+    this.cardForm.setTitle('Add Card');
+    this.cardForm.columnId = this.columnData.id;
+    
+    this.cardForm.addEventListener("save", evt => {
+      this.onCardSave(evt);
+    });
+
+    wrapper.appendChild(this.cardForm);
+  }
+
+  /**
+   * handles the card save event
+   */
+  onCardSave() {
+    this.renderCards();
+  }
+
+  /**
+   * Handles the edit button click event
+   */
+  editColumn(){
+    this.dispatchEvent(new CustomEvent('edit', {
+      detail: this.columnData
+    }));
+  }
+
+  /**
+   * Handles the delete button click event
+   */
+  async deleteCol() {
+    const res = confirm("Do you want to delete?");
+    if (res) {
+      await deleteColumn(this.columnData);
+      this.dispatchEvent(
+        new CustomEvent("delete", {
+          detail: this.columnData
+        })
+      );
+    }
+  }
+}
+
+customElements.define("column-block", Column);
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Column.html">Column</a></li><li><a href="ColumnForm.html">ColumnForm</a></li></ul><h3>Global</h3><ul><li><a href="global.html#createCard">createCard</a></li><li><a href="global.html#createColumn">createColumn</a></li><li><a href="global.html#deleteCard">deleteCard</a></li><li><a href="global.html#deleteColumn">deleteColumn</a></li><li><a href="global.html#getCards">getCards</a></li><li><a href="global.html#getColumns">getColumns</a></li><li><a href="global.html#mergeColumns">mergeColumns</a></li><li><a href="global.html#searchCards">searchCards</a></li><li><a href="global.html#searchColumns">searchColumns</a></li><li><a href="global.html#updateCard">updateCard</a></li><li><a href="global.html#updateColumn">updateColumn</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.3</a> on Wed Sep 04 2019 23:00:41 GMT+0800 (Singapore Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
