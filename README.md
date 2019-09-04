@@ -1,10 +1,6 @@
-# Card App
+# Cards App
 
 This application lets you organize your work properly.
-
- 
-
-## Table of Contents
 
 ## Installation
 
