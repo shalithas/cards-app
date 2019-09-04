@@ -1,24 +1,37 @@
 import { createColumn, updateColumn } from "./column-model.js";
 
+/**
+ * Represents a Column Form that is used for both Creating and Editing columns
+ */
 class ColumnForm extends HTMLElement {
+
+  /**
+   * Creates a new instance of ColumnForm
+   */
   constructor() {
     super();
 
     this.root = this.attachShadow({ mode: "open" });
     this.render();
+
+    //Form is only shown after clicking on the show form button
     this.isFormVisible = false;
   }
 
+  /**
+   * Sets the title of the form tile
+   * @param {string} title 
+   */
   setTitle(title) {
     this.title = title;
     this.activeColumn = this.activeColumn ? this.activeColumn : { title: "" };
     this.render();
   }
 
+  /**
+   * Renders the HTML structure of the form
+   */
   render() {
-    // this.activeColumn = this.activeColumn ? this.activeColumn : { title: "" };
-    // this.title = "Add Column";
-
     this.root.innerHTML = `
       <style>
           div.wrapper {
@@ -139,17 +152,22 @@ class ColumnForm extends HTMLElement {
     this.bindEvents();
   }
 
+  /**
+   * Binds the events of the element in the component
+   */
   bindEvents() {
-    const ele = this.root.querySelector("div form");
+    const form = this.root.querySelector("div form");
 
-    if(ele){
-      ele.onsubmit = evt => {
-        const form = new FormData(ele);
+    // Handling the form submit event
+    if(form){
+      form.onsubmit = evt => {
+        const formData = new FormData(form);
         evt.preventDefault();
-        this.onSave(form);
+        this.onSave(formData);
       };
     }
 
+    // Handling the click on the showForm button
     const showFormButton = this.root.getElementById("show-form");
     if(showFormButton){
       showFormButton.onclick = evt => {
@@ -158,6 +176,7 @@ class ColumnForm extends HTMLElement {
       };
     }
 
+    //handling the cancel button click
     const cancelButton = this.root.querySelector("form div button");
     if(cancelButton){
       cancelButton.onclick = evt => {
@@ -172,11 +191,18 @@ class ColumnForm extends HTMLElement {
     }
   }
 
+  /**
+   * Showing and Hiding of the Form/ShowFormButton
+   */
   toggleForm(){
     this.isFormVisible = !this.isFormVisible;
     this.render();
   }
 
+  /**
+   * Handles saving of the column  
+   * @param {FormData} form Form data
+   */
   async onSave(form) {
     const column = {
       title: form.get("title")
@@ -192,6 +218,10 @@ class ColumnForm extends HTMLElement {
     this.dispatchEvent(new CustomEvent("save", { detail: column }));
   }
 
+  /**
+   * Used to set the column for Editing
+   * @param {Object} col Column object to be edited
+   */
   setColumnData(col) {
     this.activeColumn = col;
     this.title = "Edit Column";
