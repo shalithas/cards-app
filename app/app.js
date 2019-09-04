@@ -7,7 +7,7 @@ window.addEventListener("load", () => {
   const app = document.querySelector("App");
   const home = document.createElement("home-page");
   const header = document.createElement("header-bar");
-  header.addEventListener("search", evt => {
+  header.addEventListener("searchchange", evt => {
     home.search(evt.detail);
   });
   home.className = "wrapper";

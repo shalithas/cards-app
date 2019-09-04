@@ -51,12 +51,12 @@ class HeaderBar extends HTMLElement {
   bindEvents() {
     const ele = this.root.querySelector("input");
 
-    ele.onchange = this.onSearchChange;
+    ele.onsearch = this.onSearchChange;
   }
 
   onSearchChange(evt) {
     this.dispatchEvent(
-      new CustomEvent("search", {
+      new CustomEvent("searchchange", {
         detail: evt.target.value,
         bubbles: true,
         cancelable: false,
