@@ -32,4 +32,4 @@ This is where user guide will reside
 
 ## Documentation
 
-Headover to https://shalithas.github.io/cards-app/docs
+Headover to https://shalithas.github.io/cards-app
