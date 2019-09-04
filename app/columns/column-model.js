@@ -89,7 +89,7 @@ export const searchColumns = async text => {
  * @param {Array} colSet2 Column array2 to be merged
  * @return {Array} merged column array
  */
-const mergeColumns = (colSet1, colSet2) => {
+export const mergeColumns = (colSet1, colSet2) => {
   let output = {};
   colSet1.forEach(col => {
     output[col.id] = col;
