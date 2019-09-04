@@ -1,14 +1,14 @@
 import "./search-bar.js";
 
 class HeaderBar extends HTMLElement {
-    constructor() {
-      super();
-  
-      this.root = this.attachShadow({ mode: "open" });
-      this.render();
-    }
-    render() {
-      this.root.innerHTML = `
+  constructor() {
+    super();
+
+    this.root = this.attachShadow({ mode: "open" });
+    this.render();
+  }
+  render() {
+    this.root.innerHTML = `
         <style>
             div.wrapper {
                 postion: abosolute;
@@ -35,8 +35,7 @@ class HeaderBar extends HTMLElement {
           
         </div>
     `;
-    }
   }
-  
-  customElements.define("header-bar", HeaderBar);
-  
+}
+
+customElements.define("header-bar", HeaderBar);

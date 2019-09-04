@@ -19,12 +19,12 @@ class HomePage extends HTMLElement {
       </style>
       <div class="wrapper"></div>
     `;
-    const wrapper = this.root.querySelector('div');
-    wrapper.innerHTML = '';
+    const wrapper = this.root.querySelector("div");
+    wrapper.innerHTML = "";
     data.forEach(col => {
       const column = document.createElement("column-block");
       column.setColumn(col, col.cards ? col.cards : null);
-      column.className = 'col';
+      column.className = "col";
       column.addEventListener("edit", evt => {
         this.colForm.setColumnData(evt.detail);
       });
@@ -33,22 +33,20 @@ class HomePage extends HTMLElement {
       });
       wrapper.appendChild(column);
     });
-    this.colForm = document.createElement('column-form');
-    this.colForm.setTitle('Add Column');
-    this.colForm.addEventListener("save", (evt) => {
+    this.colForm = document.createElement("column-form");
+    this.colForm.setTitle("Add Column");
+    this.colForm.addEventListener("save", evt => {
       this.onCardSave(evt);
     });
     wrapper.appendChild(this.colForm);
   }
 
-  onCardSave(evt){
+  onCardSave(evt) {
     this.render();
   }
 
-  async search(search){
-    console.log(search);
+  async search(search) {
     const columns = await searchColumns(search);
-    console.log(columns);
     this.render(columns);
   }
 }

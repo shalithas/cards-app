@@ -1,4 +1,4 @@
-import {searchColumns} from '../columns/column-model.js';
+import { searchColumns } from "../columns/column-model.js";
 
 class HeaderBar extends HTMLElement {
   constructor() {
@@ -6,7 +6,7 @@ class HeaderBar extends HTMLElement {
 
     this.root = this.attachShadow({ mode: "open" });
     this.render();
-      this.bindEvents();
+    this.bindEvents();
   }
   render() {
     this.root.innerHTML = `
@@ -55,12 +55,14 @@ class HeaderBar extends HTMLElement {
   }
 
   onSearchChange(evt) {
-    this.dispatchEvent(new CustomEvent('search', {
-      detail: evt.target.value,
-      bubbles: true,
-      cancelable: false,
-      composed: true
-    }));
+    this.dispatchEvent(
+      new CustomEvent("search", {
+        detail: evt.target.value,
+        bubbles: true,
+        cancelable: false,
+        composed: true
+      })
+    );
     // const cards = await searchColumns(evt.target.value);
     // console.log(cards);
   }
