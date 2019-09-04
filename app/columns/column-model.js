@@ -42,12 +42,12 @@ export const deleteColumn = async column => {
 export const searchColumns = async text => {
   let res = await fetch(url);
   let cols = await res.json();
-  // const filteredCols = cols.filter(col => {
-  //   const titleSearch = col.title.toLowerCase().search(text.toLowerCase());
-  //   return titleSearch > -1;
-  // });
+  const filteredCols = cols.filter(col => {
+    const titleSearch = col.title.toLowerCase().search(text.toLowerCase());
+    return titleSearch > -1;
+  });
   let cards = await searchCards(text);
-  const filterdCols = cols.filter(col => {
+  let filteredColumnsWithCards = cols.filter(col => {
     const filteredCards = cards.filter(card => {
       return card.columnId === col.id
 
@@ -55,5 +55,17 @@ export const searchColumns = async text => {
     col.cards = filteredCards;
     return filteredCards.length > 0;
   });
-  return filterdCols;
+  return mergeColumns(filteredCols, filteredColumnsWithCards);
 };
+
+const mergeColumns = (colSet1, colSet2) => {
+  let output = {};
+  colSet1.forEach(col => {
+    output[col.id] = col;
+  });
+  colSet2.forEach(col => {
+    output[col.id] = col;
+  });
+
+  return Object.values(output);
+}
